@@ -14,12 +14,18 @@ export default function App() {
     });
   };
 
+  const deleteData = (dataİd) => {
+    setData((prevData) => {
+      return prevData.filter((data) => data.id !== dataİd);
+    });
+  };
+
   return (
     <div>
       <h1>Phonebook</h1>
       <ContactForm onAdd={addData} />
       <SearchBox />
-      <ContactList data={data} />
+      <ContactList data={data} onDelete={deleteData} />
     </div>
   );
 }

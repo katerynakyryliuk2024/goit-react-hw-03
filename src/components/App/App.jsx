@@ -8,6 +8,8 @@ import İnitialData from "../data.json";
 
 export default function App() {
   const [data, setData] = useState(İnitialData);
+  const [filter, setFilter] = useState("");
+
   const addData = (newData) => {
     setData((prevData) => {
       return [...prevData, newData];
@@ -20,12 +22,16 @@ export default function App() {
     });
   };
 
+  const filteredData = data.filter((el) =>
+    el.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+  );
+
   return (
     <div>
       <h1>Phonebook</h1>
       <ContactForm onAdd={addData} />
-      <SearchBox />
-      <ContactList data={data} onDelete={deleteData} />
+      <SearchBox value={filter} onFilter={setFilter} />
+      <ContactList data={filteredData} onDelete={deleteData} />
     </div>
   );
 }

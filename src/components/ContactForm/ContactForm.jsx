@@ -1,9 +1,23 @@
 import css from "./ContactForm.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { nanoid } from "nanoid";
+//import * as Yup from "yup";
 
-export default function ContactForm() {
+export default function ContactForm({ onAdd }) {
+  const handleSubmit = (values, actions) => {
+    console.log("handleSubmit", values);
+    onAdd(values);
+    actions.resetForm();
+  };
   return (
-    <Formik initialValues={{}} onSubmit={() => {}}>
+    <Formik
+      initialValues={{
+        name: "",
+        number: "",
+        id: nanoid(),
+      }}
+      onSubmit={handleSubmit}
+    >
       <Form className={css.form}>
         <div className={css.group}>
           <label className={css.label}>Name</label>

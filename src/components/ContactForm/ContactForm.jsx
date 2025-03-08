@@ -4,10 +4,15 @@ import { nanoid } from "nanoid";
 import * as Yup from "yup";
 import "yup-phone";
 
+const phoneRegExp = /^(?:\+38)?0\d{9}$/;
+
 const UserSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, "Must be min 3 chars")
     .max(50, "Must be max 50 chars")
+    .required("This field is required"),
+  number: Yup.string()
+    .matches(phoneRegExp, "İnvalid phone number format")
     .required("This field is required"),
 });
 

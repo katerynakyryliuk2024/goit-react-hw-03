@@ -1,7 +1,16 @@
 import css from "./ContactForm.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { nanoid } from "nanoid";
-//import * as Yup from "yup";
+import * as Yup from "yup";
+import "yup-phone";
+
+const UserSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(3, "Must be min 3 chars")
+    .max(50, "Must be max 50 chars")
+    .required("This field is required"),
+  // number: Yup.string().phone("IN", true).required(),//
+});
 
 export default function ContactForm({ onAdd }) {
   const handleSubmit = (values, actions) => {
@@ -17,6 +26,7 @@ export default function ContactForm({ onAdd }) {
         id: nanoid(),
       }}
       onSubmit={handleSubmit}
+      validationSchema={UserSchema}
     >
       <Form className={css.form}>
         <div className={css.group}>

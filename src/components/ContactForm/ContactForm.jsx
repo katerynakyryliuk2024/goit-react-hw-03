@@ -12,6 +12,8 @@ const UserSchema = Yup.object().shape({
     .max(50, "Must be max 50 chars")
     .required("This field is required"),
   number: Yup.string()
+    .min(3, "Must be min 3 chars")
+    .max(50, "Must be max 50 chars")
     .matches(phoneRegExp, "İnvalid phone number format")
     .required("This field is required"),
 });

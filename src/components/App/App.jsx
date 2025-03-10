@@ -5,6 +5,7 @@ import SearchBox from "../SearchBox/SearchBox";
 import ContactList from "../ContactList/ContactList";
 import { useState, useEffect } from "react";
 import İnitialData from "../data.json";
+import { nanoid } from "nanoid";
 
 export default function App() {
   const [data, setData] = useState(() => {
@@ -19,7 +20,13 @@ export default function App() {
     window.localStorage.setItem("savedData", JSON.stringify(data));
   }, [data]);
 
-  const addData = (newData) => {
+  const addData = (values) => {
+    const newData = {
+      name: values.name,
+      number: values.number,
+      id: nanoid(),
+    };
+
     setData((prevData) => {
       return [...prevData, newData];
     });
